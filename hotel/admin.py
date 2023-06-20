@@ -7,8 +7,18 @@ from django_summernote.admin import SummernoteModelAdmin
 class RoomAdmin(SummernoteModelAdmin):
 
 
-    list_display = ('title', 'room_slug', 'price_per_night','featured',)
-    search_fields = ['title', 'featured']
-    list_filter = ('featured', 'is_booked', 'price_per_night', 'capacity', 'room_size',)
+    list_display = ('title', 'room_slug', 'price_per_night','category',)
+    search_fields = ['title', 'category']
+    list_filter = ('is_booked', 'price_per_night', 'category', 'room_size',)
     prepopulated_fields = {'room_slug': ('title',)}
     summernote_fields = ('content',)
+
+
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('category_name',)
+    list_filter = ('category_name',)
+    search_fields = ('category_name',)
+
+
+

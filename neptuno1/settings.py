@@ -31,7 +31,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['neptuno2.herokuapp.com', 'localhost',  '8000-rhogand-neptuno-95t945rkz43.ws-eu99.gitpod.io']
+ALLOWED_HOSTS = ['neptuno2.herokuapp.com', 'localhost',  '8000-rhogand-neptuno-95t945rkz43.ws-eu100.gitpod.io']
 
 
 # Application definition
