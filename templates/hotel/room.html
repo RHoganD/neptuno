@@ -2,14 +2,14 @@
 
 {% block content %}
 
-<!-- Breadcrumb Section Begin -->
-     <div class="breadcrumb-section">
+    <!-- Breadcrumb Section Begin -->
+    <div class="breadcrumb-section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
                         <h2>Our Rooms</h2>
-                        <div class="bt-option">
+                        <div class="bt">
                             <a href="./index.html">Home</a>
                         </div>
                     </div>
@@ -26,43 +26,47 @@
 
                 <div class="col-lg-4 col-md-6">
                     <div class="room-item">
-                {% for room in room_list %}
-                <!-- <div class="col-md-4">
-                    <div class="card mb-4">
-                        <div class="card-body"> -->
-                            <div class="image-container">    
-                       
+                {% for room in room_list %}    
+                
+                              
                         {% if "placeholder" in room.featured_image.url %}
                         <img class="card-img-top"
                             src="https://codeinstitute.s3.amazonaws.com/fullstack/blog/default.jpg">
                            
                         {% else %}
-                        <img class="card-img-top" src=" {{ room.featured_image.url }}">
+                        <img src=" {{ room.featured_image.url }}">
+
                         {% endif %}
+
                         <div class="ri-text">
-                        <h1>
-                         {{room.title}}
-                        </h1>
-                        <h4>
-                        Price: £ {{room.price_per_night}} / per night
-                        </h4>
-                         <h5>
+                        <h2>
+                         <a href="{% url 'room_details' id %}"> {{room.title}}</a> 
+                        </h2>
+                        <h3>
+                        £ {{room.price_per_night}}/<span>per night</span>
+                        </h3>
+                         <h6>
                            size: {{room.room_size}}
-                         </h5>
+                         </h6>
                          <table>
+                        <tbody>
                          <td>
                             <tr>
-                            Services: {{room.content}}
+                            <tr>
+                                <td class="r-o">Services:</td>
+                                <td> Wifi, Television, Mini-bar, Kettle, Safe, Room service </td>
+                            </tr>
+
                             </tr>
                          </td>
+                        </tbody>
                         </table>
-                        </div>
-                    </div>
-                    <a href="#" class="primary-btn">More Details</a>
-                {% if forloop.counter|divisibleby:3 %}
+                        <a href="{% url 'room_details' id %}" class="primary-btn">More Details</a>
+                        </div>                    
+                    
+                {% if forloop.counter|divisibleby:6 %}
             </div>
             </div>
-            
                         {% endif %}               
                         {% endfor %}              
                 
@@ -85,6 +89,3 @@
             {% endif %}
          </section>
         {%endblock%}
-
-               
-               
