@@ -36,6 +36,21 @@
         <div class="header">
          
             <a href="./booking.html" class="bk-btn">Booking Now</a>
+
+            {% if user.is_authenticated %}
+            <ul>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'account_signup' %}">Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'account_login' %}">Login</a>
+            </li>
+            </ul>
+            {% endif %}
         </div>
         <nav class="mainmenu mobile-menu">
             <ul>
@@ -63,11 +78,26 @@
     <header class="header-section">
         <div class="top-nav">
             <div class="container">
-               
+                {% if user.is_authenticated %}
+                         <ul>
+                         <li class="nav-item">
+                             <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
+                         </li>
+                         {% else %}
+                         <li class="nav-item">
+                             <a class="nav-link" href="{% url 'account_signup' %}">Register</a>
+                         </li>
+                         <li class="nav-item">
+                             <a class="nav-link" href="{% url 'account_login' %}">Login</a>
+                         </li>
+                         </ul>
+                         {% endif %}
+                         
                         <div class="tn-right">
                          
                             <a href="#" class="bk-btn">Booking Now</a>
                          </div>
+                        
         </div>
         </div>
         <div class="menu-item">
@@ -76,7 +106,7 @@
                     <div class="col-lg-2">
                         <div class="logo">
                             <a href="{% url 'index' %}">
-                                <img src="img/logo.png" alt="">
+                                <img src="#" alt="">
                             </a>
                         </div>
                     </div>
@@ -86,7 +116,7 @@
                                 <ul>
                                     <li><a href="{% url 'index' %}">Home</a></li>
 
-                                       <li class="active"><span><a href="{% url 'room_list' %}">Rooms</a></span>{{room_details}} 
+                                       <li class="active"><span><a href="{% url 'room_list' %}">Rooms</a></span> 
                                         <ul class="dropdown">                                  
                                             <li><a href="#">Family Room</a></li>
                                             <li><a href="#">Premium Room</a></li>
@@ -99,9 +129,9 @@
                                     <li><a href=" {% url 'contact' %}">Contact</a></li>
                                 </ul>
                             </nav>
-                            <div class="nav-right search-switch">
+                            <!-- <div class="nav-right search-switch">
                                 <i class="icon_search"></i>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>

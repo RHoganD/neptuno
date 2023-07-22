@@ -1,5 +1,8 @@
-{% extends "base.html" %}
+{% extends "base.html" %} 
+
 {% block content %}
+
+{% load crispy_forms_tags %}
 
  <!-- Breadcrumb Section Begin -->
  <div class="breadcrumb-section">
@@ -24,10 +27,10 @@
         <div class="row">
             <div class="col-lg-8">
                 <div class="room-details-item">
-                    <img src=" {{ room.featured_image.url }}" alt="">
+                    <img src=" {{ room_details.featured_image.url }}" alt="room image">
                     <div class="rd-text">
                         <div class="rd-title">
-                            <h3> {{room.title}}</h3>
+                            <h3> {{room_details.title}}</h3>
                             <div class="rdt-right">
                                 <div class="rating">
                                     <i class="icon_star"></i>
@@ -39,77 +42,46 @@
                                 <a href="#">Booking Now</a>
                             </div>
                         </div>
-                        <h2>  £ {{room.price_per_night}}/<span>pernight</span>
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <td class="r-o">Size:</td>
-                                    <td><p>{{room.room_size}}</p></td>
-                                </tr>
-                                <tr>
-                                    <td class="r-o">Capacity:</td>
-                                    <td><p>{{room.capacity}}</p></td>
-                                </tr>
-                                 <tr>
-                                    <td class="r-o">Services:</td>
-                                    <td>Wifi, Television, Mini-bar, Kettle, Safe, Room service</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        
-                    </div>
-                </div>
-                <div class="rd-reviews">
-                    <h4>Reviews</h4>
-                    <div class="review-item">
-                        <div class="ri-pic">
-                            <img src="img/room/avatar/avatar-1.jpg" alt="">
-                        </div>
-                        <div class="ri-text">
-                            <span>27 Aug 2019</span>
-                            <div class="rating">
-                                <i class="icon_star"></i>
-                                <i class="icon_star"></i>
-                                <i class="icon_star"></i>
-                                <i class="icon_star"></i>
-                                <i class="icon_star-half_alt"></i>
-                            </div>
-                            <h5>Brandon Kelley</h5>
-                            <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur,
-                                adipisci velit, sed quia non numquam eius modi tempora. incidunt ut labore et dolore
-                                magnam.</p>
-                        </div>
-                    </div>
-                    <div class="review-item">
-                        <div class="ri-pic">
-                            <img src="img/room/avatar/avatar-2.jpg" alt="">
-                        </div>
-                        <div class="ri-text">
-                            <span>27 Aug 2019</span>
-                            <div class="rating">
-                                <i class="icon_star"></i>
-                                <i class="icon_star"></i>
-                                <i class="icon_star"></i>
-                                <i class="icon_star"></i>
-                                <i class="icon_star-half_alt"></i>
-                            </div>
-                            <h5>Brandon Kelley</h5>
-                            <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur,
-                                adipisci velit, sed quia non numquam eius modi tempora. incidunt ut labore et dolore
-                                magnam.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="review-add">
+                        <h3>  £ {{room_details.price_per_night}}/<span>pernight</span>
+                        </h3>
+                             <h6 class="r-o">Size:
+                            {{room_details.room_size}}
+                                </h6>
+                                  <h6 class="r-o">Capacity:
+                                    {{room_details.capacity}} <span>Persons</span></h6>
+                                
+                                    <table>
+                                        <tbody>
+                                         <td>
+                                            <tr>
+                                            <tr>
+                                                <td class="r-o">Services:</td>
+                                                <td> <span>Wifi,</span> <span>Television,</span> <span>Mini-bar,</span> 
+                                                <span>Kettle,</span> <span>Safe,</span> <span>Room service</span></td>
+                                            </tr>
+                
+                                            </tr>
+                                         </td>
+                                        </tbody>
+                                    </table>  
+                                    <div><h6>description</h6></div>
+                                 </div>
+                                </div>
+                    
+                 {% if user.is_authenticated %}
+                 <div class="review-add">
                     <h4>Add Review</h4>
-                    <form action="#" class="ra-form">
+                    <!-- <p>Posting as: {{ user.username }}</p> -->
+                    <form method="post" style="margin-top: 1.3em;" class="ra-form">
+                        {{ review_form | crispy }}
+                        {% csrf_token %}                       
                         <div class="row">
-                            <div class="col-lg-6">
+                            <!-- <div class="col-lg-6">
                                 <input type="text" placeholder="Name*">
                             </div>
                             <div class="col-lg-6">
                                 <input type="text" placeholder="Email*">
-                            </div>
+                            </div> -->
                             <div class="col-lg-12">
                                 <div>
                                     <h5>You Rating:</h5>
@@ -121,19 +93,22 @@
                                         <i class="icon_star-half_alt"></i>
                                     </div>
                                 </div>
-                                <textarea placeholder="Your Review"></textarea>
-                                <button type="submit">Submit Now</button>
+                                <!-- <textarea placeholder="Your Review"></textarea> -->
+                                <button type="submit" class="btn btn-signup btn-lg">Submit</button>
                             </div>
                         </div>
                     </form>
+                    {% endif %}
                 </div>
-            </div>
+          
             <div class="col-lg-4">
                 <div class="room-booking">
                     <h3>Your Reservation</h3>
-                    <form action="#">
+                    <form action="#" method="post">
+                        {% csrf_token %}
                         <div class="check-date">
-                            <label for="date-in">Check In:</label>
+                            <label for="date-in">{{booking.checking}} Check In:</label>
+                            <!-- <label for="date-in">Check In:</label> -->
                             <input type="text" class="date-input" id="date-in">
                             <i class="icon_calendar"></i>
                         </div>
@@ -161,17 +136,6 @@
         </div>
     </div>
 </section>
-<!-- Room Details Section End -->
-
-
-
-
-
-
-
-
-
-
-{%endblock%}
+{% endblock content %}
 
 

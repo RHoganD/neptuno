@@ -9,4 +9,5 @@ urlpatterns = [
     path('<int:id>', views.room_details , name='room_details'),
     path('about', views.about , name='about'),
     path('contact', views.contact , name='contact'),
+    path('booking', views.booking , name='booking'),
 ]
